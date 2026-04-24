@@ -292,8 +292,9 @@ export function DNA({ reduced = false }: { reduced?: boolean }) {
 		const pts = pointsRef.current;
 		if (!g || !pts?.geometry.attributes.position) return;
 
-		g.rotation.x += delta * 0.017;
-		g.position.y = Math.sin(state.clock.elapsedTime * 0.38) * 0.12;
+		g.rotation.x += delta * 0.1;
+		/* 相对首屏略抬高，与顶部文案留出层次（外层 Hero 另有整体上移） */
+		g.position.y = 0.22 + Math.sin(state.clock.elapsedTime * 0.38) * 0.12;
 
 		ndc.set(pointerNDC.current.x, pointerNDC.current.y);
 		rayOrigin.setFromMatrixPosition(camera.matrixWorld);

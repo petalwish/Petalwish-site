@@ -3,11 +3,13 @@ import BaseHead from '../components/BaseHead.astro';
 import Hero from '../components/hero/Hero';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 
-const sections = [
-	{ id: 'hero', label: 'Hero' },
-	{ id: 'lab-clusters', label: '核心展厅' },
-	{ id: 'blog', label: 'Blog' },
-	{ id: 'outro', label: '履历&联系' },
+/** 首屏 HERO 不设顶栏锚点；其余分区在顶栏右侧跳转 */
+const navSections = [
+	{ id: 'about-me', label: 'ABOUT ME' },
+	{ id: 'project', label: 'PROJECT' },
+	{ id: 'blog', label: 'BLOG' },
+	{ id: 'exploration', label: 'EXPLORATION' },
+	{ id: 'contact', label: 'CONTACT' },
 ];
 ---
 
@@ -23,9 +25,9 @@ const sections = [
 			<a href="/" class="topbar-logo-slot" aria-label="首页">
 				<span class="topbar-logo-dot" aria-hidden="true"></span>
 			</a>
-			<nav class="topbar-nav" aria-label="Homepage sections">
+			<nav class="topbar-nav" aria-label="Page sections">
 				{
-					sections.map((section) => (
+					navSections.map((section) => (
 						<a href={`#${section.id}`} class="topbar-link">
 							{section.label}
 						</a>
@@ -38,7 +40,7 @@ const sections = [
 			<section id="hero" class="home-section home-section-hero" aria-label="首屏">
 				<Hero client:only="react" />
 			</section>
-			{sections.filter((s) => s.id !== 'hero').map((section) => <section id={section.id} class="home-section" />)}
+			{navSections.map((section) => <section id={section.id} class="home-section" aria-label={section.label} />)}
 		</main>
 	</body>
 </html>

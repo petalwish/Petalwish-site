@@ -164,6 +164,7 @@ a {
 	align-items: center;
 	justify-content: center;
 	padding: clamp(1.5rem, 3vw, 3rem);
+	scroll-margin-top: clamp(4.5rem, 12vw, 6rem);
 }
 
 .home-section-hero {
