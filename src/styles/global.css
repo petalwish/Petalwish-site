@@ -1,9 +1,11 @@
+@import 'tailwindcss';
+
 :root {
-	/* 参考图同款：偏蓝黑的近黑底色 */
-	--bg-surface: #07090d;
+	/* 首屏规范：#070A0F + 约 3% 极地青网格 */
+	--bg-surface: #070a0f;
 	--bg-surface-soft: #0f131a;
 	--grid-size: 20px;
-	--grid-line: rgba(255, 255, 255, 0.042);
+	--grid-line: rgba(34, 211, 238, 0.03);
 	--primary-cyan: #22d3ee;
 	--accent-mint: #34d399;
 	--text-main: #e2e8f0;
@@ -162,6 +164,12 @@ a {
 	align-items: center;
 	justify-content: center;
 	padding: clamp(1.5rem, 3vw, 3rem);
+}
+
+.home-section-hero {
+	min-height: 100dvh;
+	padding: 0;
+	display: block;
 }
 
 @media (max-width: 768px) {
