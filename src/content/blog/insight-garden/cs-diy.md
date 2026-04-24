@@ -42,6 +42,7 @@ heroImage: ""
 - [ ] CS224N
 - [ ] CMU 11-785
 - [ ] MIT 6.7960
+- [ ] [命令行的艺术](https://github.com/jlevy/the-art-of-command-line/blob/master/README-zh.md)
 
 ### 论文阅读
 
