@@ -45,7 +45,11 @@ export default function Hero() {
 		<div className="relative h-[100dvh] min-h-[100dvh] w-full overflow-hidden select-none">
 			<div className="absolute inset-0 z-0">
 				<Canvas
-					camera={{ position: [0, 0.1, 5.45], fov: 42 }}
+					camera={
+						reduced
+							? { position: [0.32, 0.48, 12.6], fov: 41.5 }
+							: { position: [0.32, 0.42, 10.35], fov: 44.5 }
+					}
 					dpr={[1, 2]}
 					gl={{
 						alpha: true,
