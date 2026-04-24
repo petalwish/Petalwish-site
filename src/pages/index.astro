@@ -16,9 +16,7 @@ const sections = [
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
 	</head>
 	<body class="home-page">
-		<div class="home-bg" aria-hidden="true">
-			<div class="home-bg-dna-glow"></div>
-		</div>
+		<div class="home-bg" aria-hidden="true"></div>
 
 		<header class="home-topbar">
 			<a href="/" class="topbar-logo-slot" aria-label="首页">
@@ -36,15 +34,7 @@ const sections = [
 		</header>
 
 		<main class="home-main">
-			{
-				sections.map((section) => (
-					<section id={section.id} class="home-section">
-						<div class="section-shell">
-							<span class="section-chip">{section.label}</span>
-						</div>
-					</section>
-				))
-			}
+			{sections.map((section) => <section id={section.id} class="home-section" />)}
 		</main>
 	</body>
 </html>
