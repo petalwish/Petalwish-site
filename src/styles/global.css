@@ -1,124 +1,237 @@
-/*
-  The CSS in this style tag is based off of Bear Blog's default CSS.
-  https://github.com/HermanMartinus/bearblog/blob/297026a877bc2ab2b3bdfbd6b9f7961c350917dd/templates/styles/blog/default.css
-  License MIT: https://github.com/HermanMartinus/bearblog/blob/master/LICENSE.md
- */
-
 :root {
-	--accent: #2337ff;
-	--accent-dark: #000d8a;
-	--black: 15, 18, 25;
-	--gray: 96, 115, 159;
-	--gray-light: 229, 233, 240;
-	--gray-dark: 34, 41, 57;
-	--gray-gradient: rgba(var(--gray-light), 50%), #fff;
-	--box-shadow:
-		0 2px 6px rgba(var(--gray), 25%), 0 8px 24px rgba(var(--gray), 33%),
-		0 16px 32px rgba(var(--gray), 33%);
+	/* 参考图同款：偏蓝黑的近黑底色 */
+	--bg-surface: #07090d;
+	--bg-surface-soft: #0f131a;
+	--grid-size: 20px;
+	--grid-line: rgba(255, 255, 255, 0.042);
+	--primary-cyan: #22d3ee;
+	--accent-mint: #34d399;
+	--text-main: #e2e8f0;
+	--text-secondary: #94a3b8;
+	--border-glow: rgba(34, 211, 238, 0.1);
+	--transition-vibe: all 1.2s cubic-bezier(0.23, 1, 0.32, 1);
+	--font-tech:
+		'JetBrains Mono', 'SFMono-Regular', Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+	--font-body:
+		'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue',
+		sans-serif;
 }
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+html {
+	background-color: var(--bg-surface);
+}
+
+html,
 body {
-	font-family: var(--font-atkinson);
+	scroll-behavior: smooth;
+}
+
+body {
 	margin: 0;
-	padding: 0;
-	text-align: left;
-	background: linear-gradient(var(--gray-gradient)) no-repeat;
-	background-size: 100% 600px;
-	word-wrap: break-word;
-	overflow-wrap: break-word;
-	color: rgb(var(--gray-dark));
-	font-size: 20px;
-	line-height: 1.7;
+	min-height: 100vh;
+	font-family: var(--font-body);
+	letter-spacing: 0.02em;
+	color: var(--text-main);
+	background-color: var(--bg-surface);
+	background-image:
+		linear-gradient(var(--grid-line) 1px, transparent 1px),
+		linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+	background-size: var(--grid-size) var(--grid-size);
+	background-attachment: fixed;
+	text-rendering: optimizeLegibility;
 }
-main {
-	width: 720px;
-	max-width: calc(100% - 2em);
-	margin: auto;
-	padding: 3em 1em;
-}
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-	margin: 0 0 0.5rem 0;
-	color: rgb(var(--black));
-	line-height: 1.2;
-}
-h1 {
-	font-size: 3.052em;
-}
-h2 {
-	font-size: 2.441em;
-}
-h3 {
-	font-size: 1.953em;
-}
-h4 {
-	font-size: 1.563em;
-}
-h5 {
-	font-size: 1.25em;
-}
-strong,
-b {
-	font-weight: 700;
-}
+
 a {
-	color: var(--accent);
+	color: inherit;
+	text-decoration: none;
+	transition: var(--transition-vibe);
 }
-a:hover {
-	color: var(--accent);
+
+.home-page {
+	position: relative;
+	overflow-x: clip;
 }
-p {
-	margin-bottom: 1em;
+
+.home-bg {
+	position: fixed;
+	inset: 0;
+	z-index: -2;
+	pointer-events: none;
 }
-.prose p {
-	margin-bottom: 2em;
+
+.home-bg::before {
+	content: '';
+	position: absolute;
+	inset: 0;
+	background:
+		radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.03) 0%, transparent 42%),
+		radial-gradient(circle at 85% 95%, rgba(5, 7, 10, 0.62) 0%, transparent 48%);
+	pointer-events: none;
 }
-textarea {
+
+.home-bg-dna-glow {
+	position: absolute;
+	inset: 10% 12%;
+	background:
+		radial-gradient(circle at 50% 45%, rgba(34, 211, 238, 0.2), rgba(34, 211, 238, 0) 45%),
+		radial-gradient(circle at 54% 52%, rgba(52, 211, 153, 0.14), rgba(52, 211, 153, 0) 40%);
+	filter: blur(36px);
+	opacity: 0.9;
+	animation: ambient-breath 14s ease-in-out infinite alternate;
+}
+
+.home-topbar {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
 	width: 100%;
-	font-size: 16px;
-}
-input {
-	font-size: 16px;
-}
-table {
-	width: 100%;
-}
-img {
-	max-width: 100%;
-	height: auto;
-	border-radius: 8px;
-}
-code {
-	padding: 2px 5px;
-	background-color: rgb(var(--gray-light));
-	border-radius: 2px;
-}
-pre {
-	padding: 1.5em;
-	border-radius: 8px;
-}
-pre > code {
-	all: unset;
-}
-blockquote {
-	border-left: 4px solid var(--accent);
-	padding: 0 0 0 20px;
-	margin: 0;
-	font-size: 1.333em;
-}
-hr {
+	min-height: 4.25rem;
+	padding: 1.1rem clamp(1.5rem, 5vw, 3.75rem);
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 1.25rem;
 	border: none;
-	border-top: 1px solid rgb(var(--gray-light));
+	border-radius: 0;
+	background: transparent;
+	backdrop-filter: none;
+	box-shadow: none;
+	z-index: 20;
 }
-@media (max-width: 720px) {
-	body {
-		font-size: 18px;
+
+.topbar-logo-slot {
+	flex-shrink: 0;
+	width: 2.5rem;
+	height: 2.5rem;
+	display: grid;
+	place-items: center;
+	padding: 0;
+	border-radius: 999px;
+	border: 1px solid rgba(226, 232, 240, 0.22);
+	color: inherit;
+	background: transparent;
+	transition: var(--transition-vibe);
+}
+
+.topbar-logo-slot:hover {
+	border-color: rgba(226, 232, 240, 0.38);
+}
+
+.topbar-logo-dot {
+	width: 0.45rem;
+	height: 0.45rem;
+	border-radius: 50%;
+	background: var(--text-main);
+	box-shadow: 0 0 0 1px rgba(226, 232, 240, 0.15);
+}
+
+.topbar-nav {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	gap: 0.35rem 1rem;
+	flex-wrap: wrap;
+}
+
+.topbar-link {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0.45rem 0.15rem;
+	border-radius: 0;
+	font: 500 0.78rem/1 var(--font-tech);
+	letter-spacing: 0.06em;
+	text-transform: uppercase;
+	color: var(--text-secondary);
+	border: none;
+	border-bottom: 1px solid transparent;
+}
+
+.topbar-link:hover {
+	color: var(--text-main);
+	border-bottom-color: rgba(34, 211, 238, 0.45);
+	background: transparent;
+	box-shadow: none;
+}
+
+.home-main {
+	position: relative;
+	z-index: 1;
+	padding-top: clamp(4.75rem, 11vw, 5.75rem);
+}
+
+.home-section {
+	min-height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: clamp(1.5rem, 3vw, 3rem);
+}
+
+.section-shell {
+	width: min(1120px, 100%);
+	min-height: 72vh;
+	border: 1px solid var(--border-glow);
+	border-radius: 16px;
+	background: linear-gradient(135deg, rgba(15, 19, 26, 0.55), rgba(7, 9, 13, 0.48));
+	background: linear-gradient(
+		135deg,
+		color-mix(in srgb, var(--bg-surface-soft) 58%, transparent),
+		color-mix(in srgb, var(--bg-surface) 52%, transparent)
+	);
+	backdrop-filter: blur(20px);
+	box-shadow: inset 1px 1px 0 rgba(255, 255, 255, 0.04);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.section-chip {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0.6rem 1.2rem;
+	border-radius: 999px;
+	border: 1px solid var(--border-glow);
+	font: 500 clamp(0.9rem, 1.2vw, 1rem) / 1 var(--font-tech);
+	color: var(--text-main);
+	background: rgba(34, 211, 238, 0.08);
+}
+
+@keyframes ambient-breath {
+	0% {
+		transform: translate3d(-2%, -1%, 0) scale(0.96);
+		opacity: 0.6;
 	}
-	main {
-		padding: 1em;
+	100% {
+		transform: translate3d(2%, 1%, 0) scale(1.06);
+		opacity: 1;
+	}
+}
+
+@media (max-width: 768px) {
+	.home-topbar {
+		align-items: flex-start;
+		flex-direction: column;
+		padding-inline: clamp(1.25rem, 5vw, 2rem);
+		padding-block: 1rem;
+		gap: 1rem;
+	}
+
+	.topbar-nav {
+		width: 100%;
+		justify-content: flex-start;
+	}
+
+	.home-main {
+		padding-top: clamp(6.5rem, 22vw, 8rem);
 	}
 }
 
@@ -130,12 +243,8 @@ hr {
 	height: 1px;
 	width: 1px;
 	overflow: hidden;
-	/* IE6, IE7 - a 0 height clip, off to the bottom right of the visible 1px box */
 	clip: rect(1px 1px 1px 1px);
-	/* maybe deprecated but we need to support legacy browsers */
 	clip: rect(1px, 1px, 1px, 1px);
-	/* modern browsers, clip-path works inwards from each corner */
 	clip-path: inset(50%);
-	/* added line to stop words getting smushed together (as they go onto separate lines and some screen readers do not understand line feeds as a space */
 	white-space: nowrap;
 }
