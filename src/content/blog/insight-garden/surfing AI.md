@@ -1,6 +1,6 @@
 ---
 title: "致每一个勇敢出发的自己"
-description: "这是我使用 Vibe Coding 迁移过来的第一篇文章"
+description: "这是我的卷首语"
 pubDate: "2026-04-23"
 heroImage: "" 
 ---
