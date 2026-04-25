@@ -1,7 +1,14 @@
+---
+import CaffeineMolecule from './CaffeineMolecule';
+---
+
 <section class="about-shell" aria-label="About me incubator frame">
 	<div class="incubator-stage">
 		<div class="incubator-frame" role="img" aria-label="培养皿外框">
 			<div class="frame-headline">// IDE_INCUBATOR_V3.0 (IDE 培养皿 V3.0)</div>
+			<div class="incubator-molecule-layer" aria-hidden="true">
+				<CaffeineMolecule client:only="react" />
+			</div>
 		</div>
 	</div>
 </section>
@@ -71,6 +78,12 @@
 		box-shadow:
 			inset 0 0 24px rgba(34, 211, 238, 0.16),
 			0 0 26px rgba(34, 211, 238, 0.2);
+	}
+
+	.incubator-molecule-layer {
+		position: absolute;
+		inset: clamp(2rem, 4.8vw, 3.8rem) clamp(2.2rem, 5.3vw, 4rem) clamp(1.75rem, 4.1vw, 3.2rem);
+		pointer-events: none;
 	}
 
 	.frame-headline {
