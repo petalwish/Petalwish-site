@@ -5,7 +5,7 @@ const TARGET_COMMAND = '>> EXECUTE_LAB_CLUSTERS.SH';
 const PREFIX_LOCK_LEN = 2;
 const GLITCH_CHARS = 'ATCG01';
 /** 小于 1：在更短滚动距离内完成整行译码（相对视口高度） */
-const SCROLL_DECODE_VIEWPORT_FRAC = 0.36;
+const SCROLL_DECODE_VIEWPORT_FRAC = 0.48;
 
 function pickGlitchChar() {
 	return GLITCH_CHARS[Math.floor(Math.random() * GLITCH_CHARS.length)] ?? '0';
