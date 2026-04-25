@@ -173,6 +173,10 @@ a {
 	display: block;
 }
 
+#about-me.home-section {
+	padding: 0;
+}
+
 @media (max-width: 768px) {
 	.home-topbar {
 		align-items: flex-start;

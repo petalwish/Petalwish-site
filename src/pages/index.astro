@@ -1,5 +1,6 @@
 ---
 import BaseHead from '../components/BaseHead.astro';
+import AboutMeContent from '../components/about/AboutMeContent.astro';
 import Hero from '../components/hero/Hero';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 
@@ -40,7 +41,13 @@ const navSections = [
 			<section id="hero" class="home-section home-section-hero" aria-label="首屏">
 				<Hero client:only="react" />
 			</section>
-			{navSections.map((section) => <section id={section.id} class="home-section" aria-label={section.label} />)}
+			{
+				navSections.map((section) => (
+					<section id={section.id} class="home-section" aria-label={section.label}>
+						{section.id === 'about-me' ? <AboutMeContent /> : null}
+					</section>
+				))
+			}
 		</main>
 	</body>
 </html>
