@@ -12,8 +12,18 @@ interface Placement {
 	animationSpeedMultiplier: number;
 }
 
-const GRID_X = [-4.6, -2.9, -1.1, 0.8, 2.5, 4.2];
-const GRID_Y = [2.08, 1.0, -0.08, -1.16, -2.24];
+const GRID_COLS = 6;
+const GRID_ROWS = 5;
+const X_SPREAD = 5.7;
+const Y_SPREAD = 3.2;
+const X_OFFSET = -0.40;
+
+const GRID_X = Array.from({ length: GRID_COLS }, (_, i) =>
+	-X_SPREAD + (i * (X_SPREAD * 2)) / (GRID_COLS - 1),
+);
+const GRID_Y = Array.from({ length: GRID_ROWS }, (_, i) =>
+	Y_SPREAD - (i * (Y_SPREAD * 2)) / (GRID_ROWS - 1),
+);
 
 export default function ThirtyMoleculesCloud() {
 	const entries = useMemo(() => Object.entries(importedMolecules), []);
@@ -24,12 +34,12 @@ export default function ThirtyMoleculesCloud() {
 				const row = Math.floor(i / GRID_X.length);
 				const bx = GRID_X[col] ?? 0;
 				const by = GRID_Y[row] ?? 0;
-				const ox = Math.sin((i + 1) * 1.17) * 0.28;
-				const oy = Math.cos((i + 1) * 0.83) * 0.2;
+				const ox = Math.sin((i + 1) * 1.17) * 0.36;
+				const oy = Math.cos((i + 1) * 0.83) * 0.28;
 				const z = -0.88 + ((i % 6) - 2.5) * 0.23;
 				return {
 					key,
-					position: [bx + ox, by + oy, z],
+					position: [bx + ox + X_OFFSET, by + oy, z],
 					scaleMultiplier: 0.63 + ((i * 7) % 8) * 0.055,
 					opacityMultiplier: 0.6 + ((i * 5) % 6) * 0.06,
 					animationPhase: i * 0.45,
