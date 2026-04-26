@@ -2,14 +2,9 @@
 import ThirtyMoleculesCloud from './ThirtyMoleculesCloud';
 ---
 
-<section class="about-shell" aria-label="About me incubator frame">
-	<div class="incubator-stage">
-		<div class="incubator-frame" role="img" aria-label="培养皿外框">
-			<div class="frame-headline">// IDE_INCUBATOR_V3.0 (IDE 培养皿 V3.0)</div>
-			<div class="incubator-molecule-layer" aria-hidden="true">
-				<ThirtyMoleculesCloud client:only="react" />
-			</div>
-		</div>
+<section class="about-shell" aria-label="About me molecule cloud">
+	<div class="molecule-stage" aria-hidden="true">
+		<ThirtyMoleculesCloud client:only="react" />
 	</div>
 </section>
 
@@ -20,90 +15,14 @@ import ThirtyMoleculesCloud from './ThirtyMoleculesCloud';
 		min-height: 100dvh;
 		display: grid;
 		place-items: center;
-		padding: clamp(1.25rem, 4vw, 3rem);
+		padding-inline: clamp(1.25rem, 4vw, 3rem);
+		padding-block: 0;
 	}
 
-	.incubator-stage {
+	.molecule-stage {
 		position: relative;
-		width: min(96vw, 72rem);
-		aspect-ratio: 16 / 9;
-		border-radius: clamp(0.85rem, 1.6vw, 1.35rem);
-		background:
-			radial-gradient(circle at 50% 50%, rgba(34, 211, 238, 0.16), transparent 68%),
-			radial-gradient(circle at 52% 120%, rgba(56, 189, 248, 0.12), transparent 58%),
-			linear-gradient(180deg, rgba(4, 7, 12, 0.84), rgba(5, 10, 16, 0.92));
-		box-shadow:
-			0 0 38px rgba(34, 211, 238, 0.2),
-			0 0 100px rgba(34, 211, 238, 0.12),
-			inset 0 0 72px rgba(34, 211, 238, 0.08);
-		overflow: hidden;
-	}
-
-	.incubator-stage::before,
-	.incubator-stage::after {
-		content: '';
-		position: absolute;
-		inset: 0;
+		width: 100%;
+		height: 100dvh;
 		pointer-events: none;
-	}
-
-	.incubator-stage::before {
-		background:
-			linear-gradient(90deg, transparent 0%, rgba(56, 189, 248, 0.12) 50%, transparent 100%),
-			linear-gradient(0deg, transparent 0%, rgba(56, 189, 248, 0.1) 50%, transparent 100%);
-		mask:
-			linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%),
-			linear-gradient(0deg, transparent 0%, #000 8%, #000 92%, transparent 100%);
-		opacity: 0.55;
-	}
-
-	.incubator-stage::after {
-		inset: clamp(0.6rem, 1.1vw, 0.95rem);
-		border-radius: clamp(0.7rem, 1.2vw, 1.05rem);
-		border: 1px solid rgba(125, 237, 255, 0.72);
-		box-shadow:
-			0 0 0 1px rgba(34, 211, 238, 0.2),
-			0 0 20px rgba(34, 211, 238, 0.35),
-			inset 0 0 20px rgba(34, 211, 238, 0.16);
-	}
-
-	.incubator-frame {
-		position: absolute;
-		inset: clamp(1rem, 2vw, 1.65rem);
-		border-radius: clamp(0.5rem, 1vw, 0.8rem);
-		border: 1px solid rgba(125, 237, 255, 0.52);
-		background:
-			linear-gradient(180deg, rgba(14, 30, 45, 0.22), rgba(7, 16, 25, 0.15)),
-			linear-gradient(90deg, rgba(34, 211, 238, 0.07), rgba(34, 211, 238, 0.01) 28%, rgba(34, 211, 238, 0.07));
-		box-shadow:
-			inset 0 0 24px rgba(34, 211, 238, 0.16),
-			0 0 26px rgba(34, 211, 238, 0.2);
-	}
-
-	.incubator-molecule-layer {
-		position: absolute;
-		inset: clamp(1.2rem, 2.8vw, 2.2rem) clamp(1.35rem, 3.2vw, 2.5rem) clamp(1.1rem, 2.5vw, 1.9rem);
-		pointer-events: none;
-	}
-
-	.frame-headline {
-		position: absolute;
-		top: clamp(0.85rem, 1.6vw, 1.25rem);
-		left: clamp(0.95rem, 1.9vw, 1.5rem);
-		right: clamp(0.95rem, 1.9vw, 1.5rem);
-		font-family: var(--font-tech);
-		font-size: clamp(0.68rem, 1.14vw, 0.86rem);
-		letter-spacing: 0.032em;
-		color: rgba(226, 232, 240, 0.88);
-		text-shadow: 0 0 12px rgba(226, 232, 240, 0.2);
-		white-space: nowrap;
-		overflow: hidden;
-		text-overflow: ellipsis;
-	}
-
-	@media (max-width: 768px) {
-		.incubator-stage {
-			width: min(96vw, 42rem);
-		}
 	}
 </style>
