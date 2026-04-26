@@ -40,7 +40,7 @@ export const moleculeRenderConfig: MoleculeRenderConfig = {
 	edgeTubeLayers: 2,
 	nodeDuplicates: 2,
 	nodeJitter: 0.008,
-	particleSize: 0.013,
+	particleSize: 0.02,
 	particleOpacity: 1.0,
 	edgeColor: '#8edfff',
 	nodeColor: '#ffffff',

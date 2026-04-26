@@ -3,14 +3,28 @@ import { Canvas, useFrame } from '@react-three/fiber';
 import { useMemo, useRef } from 'react';
 import * as THREE from 'three';
 import type { Group } from 'three';
-import type { MoleculeData } from './caffeineData';
+import type { MoleculeData } from './moleculeTypes';
 import { moleculeRenderConfig } from './moleculeRenderConfig';
 
 interface MoleculeCloudProps {
 	data: MoleculeData;
+	showLabels?: boolean;
+	position?: [number, number, number];
+	scaleMultiplier?: number;
+	opacityMultiplier?: number;
+	animationPhase?: number;
+	animationSpeedMultiplier?: number;
 }
 
-function MoleculeMesh({ data }: MoleculeCloudProps) {
+export function MoleculeParticleMesh({
+	data,
+	showLabels = true,
+	position = [0, 0, 0],
+	scaleMultiplier = 1,
+	opacityMultiplier = 1,
+	animationPhase = 0,
+	animationSpeedMultiplier = 1,
+}: MoleculeCloudProps) {
 	const rootRef = useRef<Group>(null);
 	const cfg = moleculeRenderConfig;
 
@@ -18,9 +32,9 @@ function MoleculeMesh({ data }: MoleculeCloudProps) {
 		() =>
 			data.nodes.map((node) => ({
 				...node,
-				position: node.pos.map((v) => v * cfg.globalScale) as [number, number, number],
+				position: node.pos.map((v) => v * cfg.globalScale * scaleMultiplier) as [number, number, number],
 			})),
-		[data.nodes, cfg.globalScale],
+		[data.nodes, cfg.globalScale, scaleMultiplier],
 	);
 
 	const particleData = useMemo(() => {
@@ -96,8 +110,13 @@ function MoleculeMesh({ data }: MoleculeCloudProps) {
 	useFrame((state) => {
 		const t = state.clock.getElapsedTime();
 		if (!rootRef.current) return;
-		rootRef.current.rotation.y = Math.sin(t * cfg.swaySpeed) * cfg.swayAmplitude;
-		rootRef.current.position.y = Math.sin(t * cfg.floatSpeed) * cfg.floatAmplitude;
+		const tt = t * animationSpeedMultiplier + animationPhase;
+		rootRef.current.rotation.y = Math.sin(tt * cfg.swaySpeed) * cfg.swayAmplitude;
+		rootRef.current.position.set(
+			position[0],
+			position[1] + Math.sin(tt * cfg.floatSpeed) * cfg.floatAmplitude,
+			position[2],
+		);
 	});
 
 	return (
@@ -107,7 +126,7 @@ function MoleculeMesh({ data }: MoleculeCloudProps) {
 					size={cfg.particleSize}
 					vertexColors
 					transparent
-					opacity={cfg.particleOpacity}
+					opacity={cfg.particleOpacity * opacityMultiplier}
 					depthWrite={false}
 					blending={THREE.AdditiveBlending}
 					sizeAttenuation
@@ -115,7 +134,8 @@ function MoleculeMesh({ data }: MoleculeCloudProps) {
 				/>
 			</points>
 
-			{nodes.map((node) => {
+			{showLabels &&
+				nodes.map((node) => {
 				const isHeteroAtom = node.type === 'N' || node.type === 'O';
 				if (!isHeteroAtom) return null;
 				return (
@@ -135,12 +155,12 @@ function MoleculeMesh({ data }: MoleculeCloudProps) {
 						{node.type}
 					</Text>
 				);
-			})}
+				})}
 		</group>
 	);
 }
 
-export default function MoleculeCloud({ data }: MoleculeCloudProps) {
+export default function MoleculeCloud(props: MoleculeCloudProps) {
 	return (
 		<Canvas
 			camera={{ position: [0, 0, 8.2], fov: 42 }}
@@ -150,7 +170,7 @@ export default function MoleculeCloud({ data }: MoleculeCloudProps) {
 				gl.setClearColor(0x000000, 0);
 			}}
 		>
-			<MoleculeMesh data={data} />
+			<MoleculeParticleMesh {...props} />
 		</Canvas>
 	);
 }
